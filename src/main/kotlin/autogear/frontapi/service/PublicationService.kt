@@ -39,13 +39,13 @@ class PublicationService(
         storageProcess?.store(coverImageKey, coverImage)
 
         val publication = Publication(
-            type = newPublicationPayload.type,
-            title = newPublicationPayload.title,
-            description = newPublicationPayload.description,
-            author = newPublicationPayload.author,
-            publisher = newPublicationPayload.publisher,
-            genres = newPublicationPayload.genres,
-            status = newPublicationPayload.status,
+            type = newPublicationPayload.type!!,
+            title = newPublicationPayload.title!!,
+            description = newPublicationPayload.description!!,
+            author = newPublicationPayload.author!!,
+            publisher = newPublicationPayload.publisher!!,
+            genres = newPublicationPayload.genres!!,
+            status = newPublicationPayload.status!!,
             releaseYear = newPublicationPayload.releaseYear,
             artist =  newPublicationPayload.artist)
         publicationRepository.save(publication.copy(coverImageKey = coverImageKey))

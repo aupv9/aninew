@@ -133,3 +133,4 @@ tasks.withType<Test> {
 tasks.bootBuildImage {
 	builder.set("paketobuildpacks/builder-jammy-tiny:latest")
 }
+

@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile
 
 
 @RestController
-@RequestMapping("/api/v1//publications")
+@RequestMapping("/api/v1/publications")
 class PublicationController(
     private val publicationService: IPublicationService
 ) {

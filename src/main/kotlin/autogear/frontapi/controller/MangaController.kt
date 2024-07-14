@@ -66,10 +66,10 @@ class MangaController(
     @PutMapping("/chapter/page", consumes = [MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_OCTET_STREAM_VALUE])
     fun updatePageChapter(
         @RequestPart("image", required = false) image: MultipartFile,
+        @RequestPart("body") pageChapterManga: String,
         @RequestParam("mangaId") mangaId: String,
         @RequestParam("chapterTitle") chapterTitle: String,
-        @RequestParam("numberChapter") numberChapter: Int,
-        @RequestPart("body") pageChapterManga: String
+        @RequestParam("numberChapter") numberChapter: Int
     ): ResponseEntity<CommonResponse<Any>> {
         return ResponseEntity.ok(
             CommonResponse(
