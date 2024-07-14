@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: auto-gear
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/aupv9/auto-gear.git
+          search-paths: config-repo
+          username: aupv96@gmail.com
+          password:
+          default-label: set-up-authenticate
+

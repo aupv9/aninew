@@ -1,0 +1,4 @@
+POST http://front-env.eba-b23nqgyr.us-east-1.elasticbeanstalk.com/v1/api/auth/login
+Content-Type: application/json
+
+{ "email" : "aupv96@gmail.com", "password": "1234567" }

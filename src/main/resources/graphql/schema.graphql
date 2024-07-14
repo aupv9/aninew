@@ -1,0 +1,10 @@
+type User {
+    id: ID!,
+    name: String,
+    email: String,
+    userID: String
+}
+
+type Mutation {
+    createUser(email: String, userID: String, name: String): User!
+}

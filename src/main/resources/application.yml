@@ -1,0 +1,71 @@
+server:
+  port: 8001
+  compression:
+    enabled: true
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  sendgrid:
+    api-key: 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
+  session:
+    mongodb:
+      collection-name: session
+  graphql:
+    graphiql:
+      enabled: true
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: authenticate
+      auto-index-creation: true
+#      uri: mongodb+srv://admin-gear:Supersadio2023@cluster0.1ect0pa.mongodb.net/authenticate?retryWrites=true&w=majority
+  mail:
+    protocol: smtp
+    host: smtp.gmail.com
+    username: sendmailticket@gmail.com
+    password: rilt nwxf vyqp flpd
+    port: 587
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+
+
+auto-gear:
+  api:
+    version: v1
+  security:
+    TTLLoggedIn: 1
+    MaxAttempt: 3
+
+    allowList:
+      - auth/allUser/**
+      - auth/signup/**
+      - auth/registerConfirm/**
+    roleHierarchyHierarchy: ROLE_ADMIN > ROLE_USER
+
+  clientConfiguration:
+    urlAppClient: 192.168.190.36:3000/confirm-register
+
+  redisConfiguration:
+    type: alone
+    host: redis-13163.c281.us-east-1-2.ec2.cloud.redislabs.com
+    port: 13163
+    userName: default
+    password: jPAcmtZSqLHv0mOaCpeNLvi9iX1XtdbE
+
+  cfConfiguration:
+    region: auto
+    accessKey: b26822e4d21392cfd5a363a692b53aa9
+    secretKey: 4ee94c724e03e5866a5b45cad4ca85ecc62eab60113588822bc26a3a06f1a567
+    accountId: 22bc2eb698766d70fb0ff8cdc8456e32
+    bucketName: dev-media
+    endPoint: https://22bc2eb698766d70fb0ff8cdc8456e32.r2.cloudflarestorage.com
+  driveConfiguration:
+    name: dev
+  gpcConfiguration:
+    projectId: manga-428613
