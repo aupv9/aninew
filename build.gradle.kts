@@ -10,6 +10,7 @@ plugins {
 	id("java-library")
 //	id("com.bmuschko.docker-spring-boot-application") version "9.4.0"
 	id("application")
+	id("java")
 }
 
 val mainClassPath = project.findProperty("mainClassName")?.toString()
@@ -48,6 +49,7 @@ kapt {
 
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
+
 }
 
 configurations {
