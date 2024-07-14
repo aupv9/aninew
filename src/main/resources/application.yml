@@ -53,10 +53,10 @@ auto-gear:
 
   redisConfiguration:
     type: alone
-    host: redis-13163.c281.us-east-1-2.ec2.cloud.redislabs.com
-    port: 13163
+    host: redis-17245.c241.us-east-1-4.ec2.redns.redis-cloud.com
+    port: 17245
     userName: default
-    password: jPAcmtZSqLHv0mOaCpeNLvi9iX1XtdbE
+    password: O8Klin6WPMMaJfID9IBZEhsBIz6Pqozg
 
   cfConfiguration:
     region: auto
