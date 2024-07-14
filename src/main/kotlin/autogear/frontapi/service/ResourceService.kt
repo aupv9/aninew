@@ -6,10 +6,7 @@ import autogear.frontapi.mapper.ResourceDTO
 import autogear.frontapi.mapper.ResourceMapper
 import autogear.frontapi.repository.ResourceRepository
 
-import org.springframework.cache.annotation.CachePut
-import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
-import storage.connect.config.cloudflare.aws.S3Operation
 
 @Service
 class ResourceService(
@@ -39,7 +36,6 @@ class ResourceService(
 
 //    @CachePut(cacheNames = [RESOURCES_CACHE], key = "$RESOURCES_CACHE #resource.id")
     override fun addResource(resource: ResourceDTO): ResourceDTO {
-        val s3Client = S3Operation()
 
         val resourceEntity = resourceRepository.save(resourceMapper.toEntity(resource))
         return resourceMapper.toDto(resourceEntity)

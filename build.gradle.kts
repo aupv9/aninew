@@ -60,7 +60,6 @@ configurations {
 
 dependencies {
 	implementation(project(":core"))
-	implementation(project(":cloud-storage"))
 
 // https://mvnrepository.com/artifact/com.fasterxml.jackson.module/jackson-module-kotlin
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
