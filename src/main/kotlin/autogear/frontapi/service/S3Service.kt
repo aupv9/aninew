@@ -74,14 +74,7 @@ class S3Service(
 //    }
 
 
-    fun uploadFile(bucketName: String, folderName: String, file: MultipartFile?): PutObjectResponse? {
-        val fileName = file?.originalFilename?.let { Paths.get(it).fileName.toString() } ?: ""
-        val key = if (folderName.isNotEmpty() && !folderName.endsWith("/")) {
-            "$folderName/$fileName"
-        } else {
-            "$folderName$fileName"
-        }
-
+    fun uploadFile(bucketName: String, key: String, file: MultipartFile?): PutObjectResponse? {
         val putObjectRequest = PutObjectRequest.builder()
             .bucket(bucketName)
             .key(key)
@@ -156,7 +149,7 @@ class S3Service(
 
         val presignedGetObjectRequest = presigner.presignGetObject(presignRequest)
 
-        presignedGetObjectRequest.url().toString()
+        presignedGetObjectRequest.url().toExternalForm()
     }catch (e: SdkException ){
         logger.error("Error get object: {}", e.message)
         ""

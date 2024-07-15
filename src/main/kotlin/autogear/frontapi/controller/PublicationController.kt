@@ -3,8 +3,10 @@ package autogear.frontapi.controller
 import autogear.frontapi.payload.NewPublicationPayload
 import autogear.frontapi.service.IPublicationService
 import autogear.frontapi.utils.JsonUtils
+import common.CommonResponse
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestPart
@@ -26,4 +28,16 @@ class PublicationController(
         publicationService.createNewPublication(publication, file)
         return ResponseEntity.noContent().build()
     }
+
+
+    @GetMapping
+    fun getPublication(): ResponseEntity<Any>{
+        return ResponseEntity.ok(
+            CommonResponse(
+                data = publicationService.getPublications()
+            )
+        )
+    }
+
+
 }
