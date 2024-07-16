@@ -28,7 +28,7 @@ data class Publication(
     @Field("description")
     val description: String,
     @Field("cover_image_key")
-    val coverImageKey: String? = null,
+    var coverImageKey: String? = null,
     @Field("volumes")
     val volumes: List<Volume>? = emptyList(),
     @Field("chapters")
@@ -52,8 +52,8 @@ data class ChapterPub(
     val number: Int,
     val title: String,
     val volumeNumber: Int,
-    val pageKeys: List<String>,
-    val pageCount: Int,
+    var pageKeys: List<String>?=  emptyList(),
+    var pageCount: Int? = 0,
     val uploadDate: Date
 )
 

@@ -32,7 +32,7 @@ class S3Service(
         init()
     }
 
-      private final fun init() {
+    private final fun init() {
 
         s3Client = S3Client.builder()
             .region(Region.of(autoGearConfiguration.cfConfiguration.region))
@@ -74,14 +74,14 @@ class S3Service(
 //    }
 
 
-    fun uploadFile(bucketName: String, key: String, file: MultipartFile?): PutObjectResponse? {
+    fun uploadFile(bucketName: String, key: String, content: ByteArray?): PutObjectResponse? {
         val putObjectRequest = PutObjectRequest.builder()
             .bucket(bucketName)
             .key(key)
             .build()
 
         return try {
-            val requestBody = if(file == null ) RequestBody.empty() else RequestBody.fromBytes(file.bytes)
+            val requestBody = if(content == null ) RequestBody.empty() else RequestBody.fromBytes(content)
             s3Client.putObject(putObjectRequest, requestBody)
         }catch (e: SdkException ){
             logger.error("Error creating folder: {}", e.message)

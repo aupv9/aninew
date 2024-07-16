@@ -3,10 +3,8 @@ package autogear.frontapi.service
 import autogear.frontapi.configuration.AutoGearConfiguration
 import autogear.frontapi.entity.*
 import autogear.frontapi.mapper.*
-import autogear.frontapi.payload.ChapterResponse
 import autogear.frontapi.payload.MangaResponse
 import autogear.frontapi.payload.NewMangaPayload
-import autogear.frontapi.payload.PageResponse
 import autogear.frontapi.repository.MangaRepository
 import autogear.frontapi.repository.ResourceRepository
 import autogear.frontapi.storage.StorageProvider
@@ -152,7 +150,7 @@ class MangaService(
         val mangaEntity = Manga(metadata = payload.metadata)
         val bucketName = autoGearConfiguration.cfConfiguration.bucketName
 
-        storageProvider.store(mangaEntity.metadata.title.plus("/"), null)
+//        storageProvider.store(mangaEntity.metadata.title.plus("/"), null)
 
         newResource(mangaEntity.metadata.title, mangaEntity.metadata.title)
 
