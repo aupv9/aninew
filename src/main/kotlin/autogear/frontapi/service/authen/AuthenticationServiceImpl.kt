@@ -10,6 +10,8 @@ import autogear.frontapi.repository.UserRepository
 import autogear.frontapi.service.AuthenticateService
 import autogear.frontapi.utils.RedisUtils
 import autogear.frontapi.utils.UtilCommon
+import autogear.frontapi.utils.UtilCommon.Companion.maxExtraTime
+import autogear.frontapi.utils.UtilCommon.Companion.minExtraTime
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTDecodeException
 import common.*
@@ -28,6 +30,7 @@ import java.security.interfaces.RSAPublicKey
 
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.random.Random
 
 
 @Service
@@ -58,7 +61,7 @@ class AuthenticationServiceImpl(
     private fun createSessionInternal(userID: String, email: String, expirationDateRT: Date): ResponseAuthenticate{
 
         val keyPairGenerator = Utils.generateKeyPair()
-        val expirationDateAT = Date(System.currentTimeMillis() * 1000 + autoGearConfiguration.security.expiryAT)
+        val expirationDateAT = Date(System.currentTimeMillis() * 1000 + autoGearConfiguration.security.expiryAT )
 
         val claims = mapOf(
             "userID" to userID,
@@ -70,8 +73,10 @@ class AuthenticationServiceImpl(
 
             val mapTTL = autoGearConfiguration.redisConfiguration.cacheWithTTL
             if(RedisUtils.checkConnection(redisTemplate.connectionFactory!!)){
-                UtilCommon.setKeyWithTransaction("AT_$userID", accessToken, redisTemplate, mapTTL["AT"]!!)
-                UtilCommon.setKeyWithTransaction("RT_$userID", refreshToken, redisTemplate, mapTTL["RT"]!!)
+
+
+                UtilCommon.setKeyWithTransaction("AT_$userID", accessToken, redisTemplate, mapTTL["AT"]!! + Random.nextLong(minExtraTime, maxExtraTime + 1))
+                UtilCommon.setKeyWithTransaction("RT_$userID", refreshToken, redisTemplate, mapTTL["RT"]!! + Random.nextLong(minExtraTime, maxExtraTime + 1))
             }
 
 
@@ -103,6 +108,7 @@ class AuthenticationServiceImpl(
     companion object{
         const val STRING_EMPTY = ""
     }
+
     override fun logout(accessToken: String, refreshToken: String): Boolean {
         val securityContext = SecurityContextHolder.getContext()
         val user = securityContext.authentication as UsernamePasswordAuthenticationToken

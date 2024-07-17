@@ -2,6 +2,7 @@ package autogear.frontapi.service
 
 import autogear.frontapi.configuration.AutoGearConfiguration
 import autogear.frontapi.entity.ChapterPub
+import autogear.frontapi.entity.PageContent
 import autogear.frontapi.entity.Publication
 import autogear.frontapi.exception.NotFoundException
 import autogear.frontapi.mapper.PublicationDTO
@@ -16,6 +17,7 @@ import jakarta.annotation.PostConstruct
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
+import java.util.stream.IntStream
 
 @Service
 class PublicationService(
@@ -98,15 +100,18 @@ class PublicationService(
             uploadDate = Date()
         )
 
+        var chapterCurrentSize = chapters!!.size
+
         for (pageResource in chapterPublication.pageResource!!){
             val pageResourceKey = UUID.randomUUID().toString()
             storageProcess?.store(pageResourceKey, pageResource.bytes)
-            chapterEntity.pageKeys = chapterEntity.pageKeys?.plus(pageResourceKey)
+
+            val pageContent = PageContent(number = chapterCurrentSize++, pageResourceKey)
+            chapterEntity.pageKeys = chapterEntity.pageKeys?.plus(pageContent)
         }
         chapterEntity.pageCount = chapterEntity.pageKeys?.size
 
-        chapters?.plus(chapterEntity)
-
+        chapters.plus(chapterEntity)
 
         publicationRepository.save(publication)
 

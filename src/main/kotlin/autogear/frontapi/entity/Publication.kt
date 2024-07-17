@@ -52,9 +52,14 @@ data class ChapterPub(
     val number: Int,
     val title: String,
     val volumeNumber: Int,
-    var pageKeys: List<String>?=  emptyList(),
+    var pageKeys: List<PageContent>?=  emptyList(),
     var pageCount: Int? = 0,
     val uploadDate: Date
+)
+
+data class PageContent(
+    var number: Int? = 0,
+    var key: String? = ""
 )
 
 data class Metadata(

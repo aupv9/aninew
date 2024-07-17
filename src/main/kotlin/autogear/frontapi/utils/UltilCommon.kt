@@ -11,6 +11,9 @@ class UtilCommon {
 
     companion object{
 
+        const val minExtraTime = 60L
+        const val maxExtraTime = 300L
+
         fun <K : Any?> getKeyWithTransaction(key: K, redisOperations: RedisOperations<String, String>): List<Any>?{
             return redisOperations.execute(object : SessionCallback<List<Any>> {
                 override fun <K : Any?, V : Any?> execute(operations: RedisOperations<K, V>): List<Any>  {

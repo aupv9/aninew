@@ -9,6 +9,8 @@ import autogear.frontapi.repository.UserRepository
 import autogear.frontapi.service.AuthenticateService
 import autogear.frontapi.utils.RedisUtils
 import autogear.frontapi.utils.UtilCommon
+import autogear.frontapi.utils.UtilCommon.Companion.maxExtraTime
+import autogear.frontapi.utils.UtilCommon.Companion.minExtraTime
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.JWTDecodeException
 import common.Utils
@@ -29,6 +31,7 @@ import java.io.IOException
 import java.security.InvalidKeyException
 import java.security.interfaces.RSAPublicKey
 import java.util.*
+import kotlin.random.Random
 
 
 @Component
@@ -75,8 +78,8 @@ class JwtAuthenticationFilter(
                                 refreshToken = it.refreshToken[0]
                             }
                             if (accessToken.isNotBlank()){
-                                UtilCommon.setKeyWithTransaction("AT_$userID", accessToken, redisTemplate, autoGearConfiguration.redisConfiguration.cacheWithTTL["AT"]!!)
-                                UtilCommon.setKeyWithTransaction("RT_$userID", refreshToken, redisTemplate, autoGearConfiguration.redisConfiguration.cacheWithTTL["RT"]!!)
+                                UtilCommon.setKeyWithTransaction("AT_$userID", accessToken, redisTemplate, autoGearConfiguration.redisConfiguration.cacheWithTTL["AT"]!! + Random.nextLong(minExtraTime, maxExtraTime + 1))
+                                UtilCommon.setKeyWithTransaction("RT_$userID", refreshToken, redisTemplate, autoGearConfiguration.redisConfiguration.cacheWithTTL["RT"]!! + Random.nextLong(minExtraTime, maxExtraTime + 1))
                             }
                         }
                     }else{
