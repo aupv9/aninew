@@ -8,7 +8,9 @@ import autogear.frontapi.exception.NotFoundException
 import autogear.frontapi.mapper.PublicationDTO
 import autogear.frontapi.mapper.PublicationMapper
 import autogear.frontapi.payload.Chapter
+import autogear.frontapi.payload.ChapterDetail
 import autogear.frontapi.payload.NewPublicationPayload
+import autogear.frontapi.payload.PageContentDetail
 import autogear.frontapi.repository.PublicationRepository
 import autogear.frontapi.storage.StorageProvider
 import autogear.frontapi.storage.StorageProviderFactory
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import java.util.stream.IntStream
+import kotlin.jvm.optionals.toList
 
 @Service
 class PublicationService(
@@ -91,7 +94,7 @@ class PublicationService(
     override fun addChapterForPublication(id: String, chapterPublication: Chapter) {
         val publication = publicationRepository.findById(id).get()
 
-        val chapters = publication.chapters
+        var chapters = publication.chapters
 
         val chapterEntity = ChapterPub(
             number = chapterPublication.number!!,
@@ -106,14 +109,26 @@ class PublicationService(
             val pageResourceKey = UUID.randomUUID().toString()
             storageProcess?.store(pageResourceKey, pageResource.bytes)
 
-            val pageContent = PageContent(number = chapterCurrentSize++, pageResourceKey)
+            val pageContent = PageContent(number = ++chapterCurrentSize, pageResourceKey)
             chapterEntity.pageKeys = chapterEntity.pageKeys?.plus(pageContent)
         }
         chapterEntity.pageCount = chapterEntity.pageKeys?.size
 
-        chapters.plus(chapterEntity)
+        publication.chapters = chapters.plus(chapterEntity)
 
         publicationRepository.save(publication)
 
+    }
+
+    override fun getInfoChapterPub(id: String): Collection<ChapterDetail>? {
+        return publicationRepository.findById(id).orElseGet { throw NotFoundException("") }.chapters?.map {
+            val chapterDetail = ChapterDetail(
+                number = it.number, title = it.title, volumeNumber = it.volumeNumber, pageCount = it.pageCount, 
+                uploadDate = it.uploadDate,
+                pageDetail = it.pageKeys?.map { pageContent: PageContent -> PageContentDetail(pageContent.number,
+                                                                                                presignedUrlService.getPresignedUrl(pageContent.key!!, 10)) }?.toList()
+            )
+            chapterDetail
+        }
     }
 }

@@ -2,6 +2,7 @@ package autogear.frontapi.service
 
 import autogear.frontapi.mapper.PublicationDTO
 import autogear.frontapi.payload.Chapter
+import autogear.frontapi.payload.ChapterDetail
 import autogear.frontapi.payload.NewPublicationPayload
 import org.springframework.web.multipart.MultipartFile
 
@@ -14,4 +15,5 @@ interface IPublicationService {
 
     fun addChapterForPublication(id: String,chapterPublication: Chapter)
 
+    fun getInfoChapterPub(id: String): Collection<ChapterDetail>?
 }

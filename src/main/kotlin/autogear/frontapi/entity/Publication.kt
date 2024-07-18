@@ -32,7 +32,7 @@ data class Publication(
     @Field("volumes")
     val volumes: List<Volume>? = emptyList(),
     @Field("chapters")
-    val chapters: List<Chapter>? = emptyList(),
+    var chapters: List<ChapterPub>? = emptyList(),
     @Field("metadata")
     val metadata: Metadata ? = null
 ): AbstractEntity()

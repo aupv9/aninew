@@ -58,4 +58,12 @@ class PublicationController(
         publicationService.addChapterForPublication(id, publication)
         return ResponseEntity.noContent().build()
     }
+
+    @GetMapping("{id}")
+    fun getPublication(@PathVariable("id") id: String): ResponseEntity<Any>{
+
+        return ResponseEntity.ok(CommonResponse(
+            data = publicationService.getInfoChapterPub(id)
+        ))
+    }
 }
