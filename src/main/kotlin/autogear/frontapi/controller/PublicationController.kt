@@ -66,4 +66,6 @@ class PublicationController(
             data = publicationService.getInfoChapterPub(id)
         ))
     }
+
+
 }

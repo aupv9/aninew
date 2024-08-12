@@ -18,11 +18,13 @@ spring:
       enabled: true
   data:
     mongodb:
-      host: localhost
-      port: 27017
-      database: authenticate
+#      host: localhost
+#      port: 27017
+#      database: authenticate
       auto-index-creation: true
+      uri: mongodb+srv://admin-gear:Supersadio2023@cluster0.1ect0pa.mongodb.net/authenticate?retryWrites=true&w=majority&appName=Cluster0
 #      uri: mongodb+srv://admin-gear:Supersadio2023@cluster0.1ect0pa.mongodb.net/authenticate?retryWrites=true&w=majority
+
   mail:
     protocol: smtp
     host: smtp.gmail.com
