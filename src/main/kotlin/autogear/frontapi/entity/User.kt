@@ -17,3 +17,5 @@ open class User(
     var accountNonLocked: Boolean? = null,
     var status: String? = null,
 ) : AbstractEntity()
+
+

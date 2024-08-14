@@ -23,7 +23,6 @@ spring:
 #      database: authenticate
       auto-index-creation: true
       uri: mongodb+srv://admin-gear:Supersadio2023@cluster0.1ect0pa.mongodb.net/authenticate?retryWrites=true&w=majority&appName=Cluster0
-#      uri: mongodb+srv://admin-gear:Supersadio2023@cluster0.1ect0pa.mongodb.net/authenticate?retryWrites=true&w=majority
 
   mail:
     protocol: smtp
@@ -34,7 +33,6 @@ spring:
     properties:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
-
 
 
 auto-gear:
@@ -55,10 +53,10 @@ auto-gear:
 
   redisConfiguration:
     type: alone
-    host: redis-17245.c241.us-east-1-4.ec2.redns.redis-cloud.com
-    port: 17245
-    userName: default
-    password: O8Klin6WPMMaJfID9IBZEhsBIz6Pqozg
+    host: localhost
+    port: 6379
+#    userName: default
+#    password: O8Klin6WPMMaJfID9IBZEhsBIz6Pqozg
 
   cfConfiguration:
     region: auto

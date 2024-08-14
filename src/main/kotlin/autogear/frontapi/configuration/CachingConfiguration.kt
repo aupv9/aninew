@@ -51,7 +51,7 @@ class CachingConfiguration (
     fun redisTemplate(redisConnectionFactory: RedisConnectionFactory): RedisTemplate<*, *> {
         val template: RedisTemplate<Any, Any> = RedisTemplate()
         try {
-            if(redisConnectionFactory.connection.ping().equals("PONG")){
+            if(redisConnectionFactory.connection.ping()?.equals("PONG") == true){
                 template.connectionFactory =  redisConnectionFactory
                 template.keySerializer = StringRedisSerializer()
                 template.valueSerializer = StringRedisSerializer()

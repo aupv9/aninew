@@ -33,7 +33,7 @@ class UserController(
     @PreAuthorize("@userPermissionEvaluator.hasPermission(authentication, T(autogear.frontapi.enum.UserMemberPermission).MANAGE_PROFILE_USER) " +
             "&& authentication.principal == #userID")
     @PatchMapping("/password/{userID}")
-    fun updatePassword(@RequestBody request: PasswordRequest, @PathVariable("userID") userID: String): ResponseEntity<CommonResponse<Nothing>> {
+    fun updatePassword(@RequestBody(required = false) request: PasswordRequest, @PathVariable("userID") userID: String): ResponseEntity<CommonResponse<Nothing>> {
         val result = authenticationService.changePassword(request)
         val responseContent = CommonResponse(data = null, status = result, message = if(result) getMessage("change-password-success", "Change password success")
         else getMessage("change-password-fail", "Change password Fail"), code = if(result) 200 else 666)
