@@ -2,6 +2,7 @@ package autogear.frontapi.entity
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.data.mongodb.core.mapping.Field
 
 @Document(collection = "users")
 open class User(
@@ -16,6 +17,8 @@ open class User(
     var credentialsNonExpired: Boolean? = null,
     var accountNonLocked: Boolean? = null,
     var status: String? = null,
+    @Field("social_accounts")
+    val socialAccounts: MutableList<UserSocialAccount> = mutableListOf()
 ) : AbstractEntity()
 
 
