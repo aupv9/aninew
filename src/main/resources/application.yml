@@ -2,7 +2,6 @@ server:
   port: 8001
   compression:
     enabled: true
-
 spring:
   servlet:
     multipart:
@@ -60,8 +59,8 @@ auto-gear:
 
   cfConfiguration:
     region: auto
-    accessKey: b26822e4d21392cfd5a363a692b53aa9
-    secretKey: 4ee94c724e03e5866a5b45cad4ca85ecc62eab60113588822bc26a3a06f1a567
+    accessKey: AKIATCKANO5TE77MZON3
+    secretKey: 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
     accountId: 22bc2eb698766d70fb0ff8cdc8456e32
     bucketName: dev-media
     endPoint: https://22bc2eb698766d70fb0ff8cdc8456e32.r2.cloudflarestorage.com

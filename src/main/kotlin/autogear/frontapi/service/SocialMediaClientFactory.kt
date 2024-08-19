@@ -20,7 +20,7 @@ interface SocialMediaClient {
     fun post(content: Job.Payload): Boolean
 }
 
-class FacebookClient constructor(
+class FacebookClient(
     private val accessToken: String
 ): SocialMediaClient{
     override fun post(content: Job.Payload): Boolean {
@@ -29,7 +29,7 @@ class FacebookClient constructor(
 
 }
 
-class TwitterClient constructor(
+class TwitterClient(
     private val accessToken: String
 ): SocialMediaClient{
     override fun post(content: Job.Payload): Boolean {

@@ -33,15 +33,11 @@ class S3Service(
     }
 
     private final fun init() {
-
-        s3Client = S3Client.builder()
-            .region(Region.of(autoGearConfiguration.cfConfiguration.region))
+        logger.info("Initializing S3Service")
+        val s3ClientBuilder = S3Client.builder()
+            .region(Region.AP_SOUTHEAST_1)
             .credentialsProvider(customerFilePropsCredentialsProvider)
-            .endpointOverride(URI.create(autoGearConfiguration.cfConfiguration.endPoint))
-            .serviceConfiguration {
-                it.pathStyleAccessEnabled(true)
-            }
-            .build()
+        s3Client = s3ClientBuilder.build()
     }
 
     fun getHeadObject(bucketName: String, objectKey: String): HeadObjectResponse? = try {
@@ -58,6 +54,7 @@ class S3Service(
             s3Client.headBucket(headBucketRequest)
             return true
         } catch (e: Exception) {
+            logger.error("Error checking if bucket exists: {}", e.message)
             return false
         }
     }
